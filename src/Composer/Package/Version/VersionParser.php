@@ -98,7 +98,10 @@ class VersionParser
         if (null === $fullVersion) {
             $fullVersion = $version;
         }
-
+        
+        // HACK: strip out ^ as they're breaking
+        $version = str_replace("^", "", $version);
+        
         // ignore aliases and just assume the alias is required instead of the source
         if (preg_match('{^([^,\s]+) +as +([^,\s]+)$}', $version, $match)) {
             $version = $match[1];
